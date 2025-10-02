@@ -23,4 +23,34 @@ class Cloudflare:
             async with session.post(url, json=data, headers=self.headers) as response:
                 return await response.json()
 
-    # TODO: Implement PUT to enable Authenticated Origin Pulls for specific hostnames
+    # Get the certificates
+    async def get_certs(self):
+        url = self.base_url + "/hostnames/certificates"
+        async with ClientSession() as session:
+            async with session.get(url, headers=self.headers) as response:
+                return await response.json()
+
+    # Enable Authenticated Origin Pulls for specific hostnames
+    async def enable_aop(self, hostname, cert_id, enable=True):
+        url = self.base_url + "/hostnames"
+        data = {
+            "config": [
+                {
+                    "cert_id": cert_id,
+                    "hostname": hostname,
+                    "enabled": enable
+                }
+            ]
+        }
+        async with ClientSession() as session:
+            async with session.put(url, json=data, headers=self.headers) as response:
+                return await response.json()
+
+    # Get the hostnames with Authenticated Origin Pulls enabled
+    async def get_aop_hostnames(self, hostname=None):
+        url = self.base_url + "/hostnames"
+        if hostname:
+            url += f"/{hostname}"
+        async with ClientSession() as session:
+            async with session.get(url, headers=self.headers) as response:
+                return await response.json()
