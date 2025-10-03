@@ -10,6 +10,7 @@ Lightweight toolkit for:
 |-------|-------------|
 | [OpenSSL Guide](./docs/openssl-guide.md) | Step-by-step commands to create a Root CA, issue server certs, verify, trust locally, and renew. |
 | [Cloudflare Wrapper](./docs/cloudflare-wrapper.md) | Async Python client for Origin TLS Client Auth: upload certs, list, and enable AOP for hostnames. |
+| [Nginx SSL Client Auth](./docs/nginx-sslclient.md) | Guide to configuring Nginx for client certificate authentication using generated certs. |
 
 ## Quick Start
 
